@@ -75,7 +75,7 @@ def main():
     # Screen
     # Show status of the components in the screen
     # lcd_screen_controller = multiprocessing.Process(target=process_output_lcd_screen_controller,
-                                                    args=(communication_queues,))
+    #                                                    args=(communication_queues,))
     # lcd_screen_controller.daemon = True
 
     # Start the threads, queues messages are produced and consumed in those
