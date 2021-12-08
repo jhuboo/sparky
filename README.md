@@ -14,8 +14,6 @@ Refer to the instructions here to install the software: https://gitlab.com/custo
 3) find . -type f -iname "\*.sh" -exec chmod +x {} \;
 4) cd utilities/
 5) ./activate.sh
-
-Optional
 6) cd integration\_test/
 7) ./test\_motion.sh
 
