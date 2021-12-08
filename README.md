@@ -2,11 +2,22 @@
 
 This repo contains a basic os that let you move SpotMicroAI with a remote controller and a RaspberryPi
 
-If you are looking for simulation, please check the simulation repositories here: https://gitlab.com/custom_robots/spotmicroai
+If you are looking for simulation, please check the simulation repositories here: https://gitlab.com/custom\_robots/spotmicroai
 
 ## Start
 
-Refer to the instructions here to install the software: https://gitlab.com/custom_robots/spotmicroai/basic
+Refer to the instructions here to install the software: https://gitlab.com/custom\_robots/spotmicroai/basic
+
+# Steps to setup the Repo:
+1) git clone https://github.com/jhuboo/sparky spotmicroai
+2) cd spotmicroai/
+3) find . -type f -iname "\*.sh" -exec chmod +x {} \;
+4) cd utilities/
+5) ./activate.sh
+
+Optional
+6) cd integration\_test/
+7) ./test\_motion.sh
 
 # SpotMicroAI Community
 
