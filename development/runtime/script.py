@@ -57,6 +57,26 @@ def set_servo_angle(s, a):
     active_servo.angle=a
     servos[s] = (servos[s][0], a)
 
+def squat(a):
+    set_servo_angle(1, servos[1][1]+a)
+    set_servo_angle(2, servos[2][1]-a)
+    set_servo_angle(7, servos[7][1]+a)
+    set_servo_angle(8, servos[8][1]-a)
+    set_servo_angle(4, servos[4][1]-a)
+    set_servo_angle(5, servos[5][1]+a)
+    set_servo_angle(10, servos[10][1]-a)
+    set_servo_angle(11, servos[11][1]+a)
+
+def crowch(a):
+    set_servo_angle(1, servos[1][1]+a)
+    set_servo_angle(2, servos[2][1]-(a*2))
+    set_servo_angle(7, servos[7][1]+a)
+    set_servo_angle(8, servos[8][1]-(a*2))
+    set_servo_angle(4, servos[4][1]-a)
+    set_servo_angle(5, servos[5][1]+(a*2))
+    set_servo_angle(10, servos[10][1]-a)
+    set_servo_angle(11, servos[11][1]+(a*2))
+
 def rest_position():
     for x in range(len(servos)):
         set_servo_angle(x, rest_angles[x])
@@ -85,7 +105,7 @@ def set_body():
 if __name__=="__main__":
     stand_straight()
     while(True):
-        action= input("What would you like to do?")
+        action= input("What would you like to do? ")
         if action=="sit":
             rest_position()
         elif action=="stand":
@@ -93,19 +113,35 @@ if __name__=="__main__":
         elif action=="roll left":
             try:
                 while(True):
-                    roll_left(.1)
-                    time.sleep(.1)
+                    roll_left(.2)
+                    time.sleep(.01)
             except KeyboardInterrupt:
                 print("stopped")
                 pass
         elif action=="roll right":
             try:
                 while(True):
-                    roll_right(.1)
-                    time.sleep(.1)
+                    roll_right(.2)
+                    time.sleep(.01)
             except KeyboardInterrupt:
                 print("stopped")
                 pass
+        elif action=="squat":
+            while(True):
+                itrpt = input("type stop to STOP: ")
+                if itrpt=="stop":
+                    break
+                else:
+                    squat(5)
+                    time.sleep(.1)
+        elif action=="crowch":
+            while(True):
+                itrpt = input("type stop to STOP: ")
+                if itrpt=="stop":
+                    break
+                else:
+                    crowch(2)
+                    time.sleep(.1)
         else:
             print("terminating...")
             break
