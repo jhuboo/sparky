@@ -11,7 +11,7 @@ Refer to the instructions here to install the software: https://gitlab.com/custo
 # Steps to setup the Repo:
 1) git clone https://github.com/jhuboo/sparky spotmicroai
 2) cd spotmicroai/
-3) find . -type f -iname "\*.sh" -exec chmod +x {} \;
+3) find . -type f -iname "\*.sh" -exec chmod +x {} \\;
 4) cd utilities/
 5) ./activate.sh
 6) cd integration\_test/
