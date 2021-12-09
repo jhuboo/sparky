@@ -91,10 +91,23 @@ if __name__=="__main__":
         elif action=="stand":
             stand_straight()
         elif action=="roll left":
-            roll_left()
+            try:
+                while(True):
+                    roll_left(.1)
+                    time.sleep(.1)
+            except KeyboardInterrupt:
+                print("stopped")
+                pass
         elif action=="roll right":
-            roll_right()
+            try:
+                while(True):
+                    roll_right(.1)
+                    time.sleep(.1)
+            except KeyboardInterrupt:
+                print("stopped")
+                pass
         else:
+            print("terminating...")
             break
         # time.sleep(5)
     # while(True):
