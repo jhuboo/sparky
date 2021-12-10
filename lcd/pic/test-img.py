@@ -40,7 +40,7 @@ spi = board.SPI()
 # disp = ssd1351.SSD1351(spi, height=96, y_offset=32, rotation=180, # 1.27" SSD1351
 # disp = ssd1331.SSD1331(spi, rotation=180,                         # 0.96" SSD1331
 disp = st7789.ST7789(spi,
-    rotation=90,
+    rotation=270,
     cs=cs_pin,
     dc=dc_pin,
     rst=reset_pin,
@@ -65,7 +65,7 @@ draw = ImageDraw.Draw(image)
 draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
 disp.image(image)
 
-image = Image.open("blinka.jpg")
+image = Image.open("Rhett-Blink.gif")
 
 # Scale the image to the smaller screen dimension
 image_ratio = image.width / image.height

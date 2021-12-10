@@ -43,9 +43,13 @@ pca.frequency = pca9685_frequency
 # rear_right: 12, 13, 14                    = 3, 4, 5
 # front_left: 4, 5, 6                       = 6, 7, 8
 # front_right: 0, 1, 2                      = 9, 10, 11
+# servos_pos_help is meant to only help see where the above servo positions are found and nothing else
+# servos_pos_help2 is meant to only help see where the above servo positions are found and nothing else
 servos = [(8,90),(9,90),(10,90),(12,90),(13,90),(14,90),(4,90),(5,90),(6,90),(0,90),(1,90),(2,90)]
-rest_angles = [75,100,0,105,80,180,105,100,0,75,80,180]
-stand_angles = [75, 90, 90, 105, 90, 90, 105, 90, 90, 75, 90, 90]
+servos_pos_help     = [  8,   9, 10,  12, 13,  14,   4,   5,  6,  0,   1,   2]
+servos_pos_help2    = [  0,   1,  2,   3,  4,   5,   6,   7,  8,  9,  10, 11]
+rest_angles         = [ 75, 100,  0, 105, 80, 180, 105, 100, 0, 75, 80, 180]
+stand_angles        = [ 75,  90, 90, 105, 90,  90, 105, 90, 90, 75, 90,  90]
 front_shoulders = [4, 0]
 back_shoulders = [8,12]
 
@@ -56,6 +60,16 @@ def set_servo_angle(s, a):
     active_servo.set_pulse_width_range(min_pulse=500, max_pulse=2500)
     active_servo.angle=a
     servos[s] = (servos[s][0], a)
+
+    # Test against extreme servo positions
+    # 10 deg and 170 deg
+    # To prevent servos from breaking during movement
+    if a <= 10:
+        servos[s] = (servos[s][0], 10)
+    elif a >= 170:
+        servos[s] = (servos[s][0], 170)
+        
+
 
 def squat(a):
     set_servo_angle(1, servos[1][1]+a)
@@ -81,6 +95,12 @@ def rest_position():
     for x in range(len(servos)):
         set_servo_angle(x, rest_angles[x])
     time.sleep(0.1)
+
+def sit_back(a):
+    set_servo_angle(1, servos[1][1]-a)
+    set_servo_angle(2, servos[2][1]-(0.5*a))
+    set_servo_angle(4, servos[4][1]+a)
+    set_servo_angle(5, servos[5][1]+(0.5*a))
 
 def stand_straight():
     for x in range(len(servos)):
@@ -110,6 +130,14 @@ if __name__=="__main__":
             rest_position()
         elif action=="stand":
             stand_straight()
+        elif action=="sit back":
+            try:
+                while(True):
+                    sit_back(.2)
+                    time.sleep(.01)
+            except KeyboardInterrupt:
+                print("stopped")
+                pass
         elif action=="roll left":
             try:
                 while(True):
