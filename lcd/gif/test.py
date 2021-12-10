@@ -179,5 +179,5 @@ else:
     disp_width = disp.width
     disp_height = disp.height
 
-gif_player = AnimatedGif(disp, width=disp_width, height=disp_height, folder=".")
+gif_player = AnimatedGif(disp, width=disp_width, height=disp_height, folder="/home/pi/spotmicroai/lcd/gif/")
 

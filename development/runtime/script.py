@@ -13,9 +13,10 @@ from spot_micro_kinematics_python.spot_micro_stick_figure import SpotMicroStickF
 from spotmicroai.utilities.log import Logger
 from spotmicroai.utilities.config import Config
 
-log = Logger().setup_logger('Powering up SPARKY!')
 
+log = Logger().setup_logger('Powering up SPARKY!')
 log.info('setup')
+
 
 pca=None
 pca9685_address = 0x40
@@ -23,6 +24,7 @@ pca9685_reference_clock_speed = int(Config().get(
     'motion_controller[*].boards[*].pca9685_1[*].reference_clock_speed | [0] | [0] | [0]'))
 pca9685_frequency = int(
     Config().get('motion_controller[*].boards[*].pca9685_1[*].frequency | [0] | [0] | [0]'))
+
 
 gpio_port = Config().get(Config.ABORT_CONTROLLER_GPIO_PORT)
 
@@ -36,8 +38,7 @@ i2c = busio.I2C(SCL, SDA)
 pca = PCA9685(i2c_bus=i2c, address=pca9685_address, reference_clock_speed=pca9685_reference_clock_speed)
 pca.frequency = pca9685_frequency
 
-#input("Press Enter to do something: ")
-
+# Some References that might be useful for coding motion of servos
 #order: 
 # rear_left: 8, 9, 10(shoulder, leg, feet), = 0, 1, 2
 # rear_right: 12, 13, 14                    = 3, 4, 5
@@ -81,6 +82,16 @@ def squat(a):
     set_servo_angle(10, servos[10][1]-a)
     set_servo_angle(11, servos[11][1]+a)
 
+def unsquat(a):
+    set_servo_angle(1, servos[1][1]-a)
+    set_servo_angle(2, servos[2][1]+a)
+    set_servo_angle(7, servos[7][1]-a)
+    set_servo_angle(8, servos[8][1]+a)
+    set_servo_angle(4, servos[4][1]+a)
+    set_servo_angle(5, servos[5][1]-a)
+    set_servo_angle(10, servos[10][1]+a)
+    set_servo_angle(11, servos[11][1]-a)
+
 def crowch(a):
     set_servo_angle(1, servos[1][1]+a)
     set_servo_angle(2, servos[2][1]-(a*2))
@@ -91,6 +102,16 @@ def crowch(a):
     set_servo_angle(10, servos[10][1]-a)
     set_servo_angle(11, servos[11][1]+(a*2))
 
+def uncrowch(a):
+    set_servo_angle(1, servos[1][1]-a)
+    set_servo_angle(2, servos[2][1]+(a*2))
+    set_servo_angle(7, servos[7][1]-a)
+    set_servo_angle(8, servos[8][1]+(a*2))
+    set_servo_angle(4, servos[4][1]+a)
+    set_servo_angle(5, servos[5][1]-(a*2))
+    set_servo_angle(10, servos[10][1]+a)
+    set_servo_angle(11, servos[11][1]-(a*2))
+    
 def rest_position():
     for x in range(len(servos)):
         set_servo_angle(x, rest_angles[x])
@@ -162,6 +183,14 @@ if __name__=="__main__":
                 else:
                     squat(5)
                     time.sleep(.1)
+        elif action=="unsquat":
+            while(True):
+                itrpt = input("type stop to STOP: ")
+                if itrpt=="stop":
+                    break
+                else:
+                    unsquat(5)
+                    time.sleep(.1)
         elif action=="crowch":
             while(True):
                 itrpt = input("type stop to STOP: ")
@@ -169,6 +198,14 @@ if __name__=="__main__":
                     break
                 else:
                     crowch(2)
+                    time.sleep(.1)
+        elif action=="uncrowch":
+            while(True):
+                itrpt = input("type stop to STOP: ")
+                if itrpt=="stop":
+                    break
+                else:
+                    uncrowch(2)
                     time.sleep(.1)
         else:
             print("terminating...")

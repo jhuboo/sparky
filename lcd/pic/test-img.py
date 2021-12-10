@@ -45,6 +45,8 @@ disp = st7789.ST7789(spi,
     dc=dc_pin,
     rst=reset_pin,
     baudrate=BAUDRATE,
+    x_offset=0,
+    y_offset=0
 )
 # pylint: enable=line-too-long
 
@@ -65,7 +67,7 @@ draw = ImageDraw.Draw(image)
 draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
 disp.image(image)
 
-image = Image.open("Rhett-Blink.gif")
+image = Image.open("test-img.jpg")
 
 # Scale the image to the smaller screen dimension
 image_ratio = image.width / image.height
