@@ -1,6 +1,6 @@
 # Team Sparky Robotics
 
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/jhuboo/sparky)
 
 Team Sparky Robotics is creating an Open Source Quadruped Robot.
 
@@ -39,12 +39,6 @@ Additional hardware required can be found under the hardware directory.
 ## Contributing
 
 Feel free to dive in! [Open an issue](https://github.com/jhuboo/sparky/issues/new) or submit PRs.
-
-### Contributors
-
-This project exists thanks to all the people who contribute. 
-<a href="https://github.com/jhuboo/sparky/graphs/contributors"></a>
-
 
 ## License
 
