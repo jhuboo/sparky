@@ -23,6 +23,13 @@ This project uses the Raspberry Pi 4 2GB model with Buster 64-bit architecture u
 
 Additional hardware required can be found under the hardware directory.
 
+See the requirements.txt file for a list of python dependencies which can be installed with pip
+using the command:
+
+```
+python3 -m pip install -r requirements.txt
+```
+
 ## Related Efforts
 
 - [SpotmicroAI](https://gitlab.com/public-open-source/spotmicroai/basic-instructions) - A small version of Boston Dynamics's Spot
